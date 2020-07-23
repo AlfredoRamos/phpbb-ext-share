@@ -1,0 +1,22 @@
+{% if IN_SHARE_SETTINGS %}
+{% if not INCLUDED_ICONIFY_JS %}
+{%- if S_ALLOW_CDN -%}
+{% INCLUDEJS 'https://code.iconify.design/1/1.0.6/iconify.min.js' %}
+{%- else -%}
+{% INCLUDEJS '@alfredoramos_share/js/iconify.min.js' %}
+{%- endif -%}
+{% set INCLUDED_ICONIFY_JS = true %}
+{% endif %}
+{% if not INCLUDED_SORTABLE_JS %}
+{%- if S_ALLOW_CDN -%}
+{% INCLUDEJS 'https://unpkg.com/sortablejs@1.10.2/Sortable.min.js' %}
+{%- else -%}
+{% INCLUDEJS '@alfredoramos_share/js/Sortable.min.js' %}
+{%- endif -%}
+{% set INCLUDED_SORTABLE_JS = true %}
+{% endif %}
+{% if not INCLUDED_SHARE_ACP_JS %}
+{% INCLUDEJS '@alfredoramos_share/js/share_acp.js' %}
+{%- set INCLUDED_SHARE_ACP_JS = true -%}
+{% endif %}
+{% endif %}

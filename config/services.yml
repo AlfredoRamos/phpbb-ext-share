@@ -1,0 +1,19 @@
+services:
+    alfredoramos.share.listener:
+        class: alfredoramos\share\event\listener
+        tags:
+            - { name: event.listener }
+
+    alfredoramos.share.helper:
+        class: alfredoramos\share\includes\helper
+
+    alfredoramos.share.controller.acp:
+        class: alfredoramos\share\controller\acp
+        arguments:
+            - '@config'
+            - '@template'
+            - '@request'
+            - '@language'
+            - '@user'
+            - '@log'
+            - '@alfredoramos.share.helper'

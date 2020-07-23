@@ -1,0 +1,4 @@
+{% macro social_icon(icon) %}
+{% if icon is not empty %}<span class="iconify share-icon" data-icon="{{ icon | escape('html_attr') }}"></span>{% endif %}
+{% endmacro %}
+

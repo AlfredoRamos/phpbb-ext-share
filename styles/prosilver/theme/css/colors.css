@@ -1,0 +1,60 @@
+.share-link > .share-icon {
+	color: #fff;
+}
+
+.share-link > .share-icon {
+	background-color: #105289;
+}
+
+.share-link-whatsapp > .share-icon,
+.share-link-whatsapp-web > .share-icon {
+	background-color: #25D366;
+}
+
+.share-link-telegram > .share-icon {
+	background-color: #2CA5E0;
+}
+
+.share-link-facebook > .share-icon {
+	background-color: #1877F2;
+}
+
+.share-link-twitter > .share-icon {
+	background-color: #1DA1F2;
+}
+
+.share-link-reddit > .share-icon {
+	background-color: #FF4500;
+}
+
+.share-link-vk > .share-icon {
+	background-color: #4680C2;
+}
+
+.share-link-tumblr > .share-icon {
+	background-color: #36465D;
+}
+
+.share-link-evernote > .share-icon {
+	background-color: #00A82D;
+}
+
+.share-link-pocket > .share-icon {
+	background-color: #EF3F56;
+}
+
+.share-link-digg > .share-icon {
+	background-color: #000;
+}
+
+.share-link-diigo > .share-icon {
+	background-color: #3f98e5;
+}
+
+.share-link-linkedin > .share-icon {
+	background-color: #0077b5;
+}
+
+.share-link-skype > .share-icon {
+	background-color: #00AFF0;
+}

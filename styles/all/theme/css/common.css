@@ -1,0 +1,32 @@
+.share-list,
+.share-list *
+.share-list *::before,
+.share-list *::after {
+	box-sizing: border-box;
+}
+
+.share-list {
+	margin-top: 10px;
+}
+
+.share-link > .share-icon {
+	filter: opacity(60%);
+	border-radius: 4px;
+}
+
+.share-link:hover > .share-icon {
+	filter: opacity(100%);
+}
+
+@media (max-width: 700px) {
+	.share-link-whatsapp-web {
+		display: none;
+	}
+}
+
+@media (min-width: 701px) {
+	.share-link-whatsapp,
+	.share-link-sms {
+		display: none;
+	}
+}

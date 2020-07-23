@@ -1,0 +1,8 @@
+{% if not INCLUDED_ICONIFY_JS %}
+{%- if S_ALLOW_CDN -%}
+{% INCLUDEJS 'https://code.iconify.design/1/1.0.6/iconify.min.js' %}
+{%- else -%}
+{% INCLUDEJS '@alfredoramos_share/js/iconify.min.js' %}
+{%- endif -%}
+{%- set INCLUDED_ICONIFY_JS = true -%}
+{% endif %}

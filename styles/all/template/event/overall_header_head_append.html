@@ -1,0 +1,6 @@
+{% if not INCLUDED_SHARE_CSS %}
+{% INCLUDECSS '@alfredoramos_share/css/common.css' %}
+{% INCLUDECSS '@alfredoramos_share/css/style.css' %}
+{% INCLUDECSS '@alfredoramos_share/css/colors.css' %}
+{%- set INCLUDED_SHARE_CSS = true -%}
+{% endif %}
