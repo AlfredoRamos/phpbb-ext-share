@@ -1,0 +1,14 @@
+{%- if share.social_icon is not defined -%}
+{%- import '@alfredoramos_share/social_icon.html' as share -%}
+{%- endif -%}
+{% if SHARE_SOCIAL_NETWORKS and share.social_icon is defined %}
+{% apply spaceless %}
+<section class="share-list">
+	{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS %}
+	<span class="share-item share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}{% if not SOCIAL_NETWORK.ENABLED %} share-item-disabled{% endif %}" title="{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}">
+		{{ share.social_icon(SOCIAL_NETWORK.ICON) }}
+	</span>
+	{% endfor %}
+</section>
+{% endapply %}
+{% endif %}

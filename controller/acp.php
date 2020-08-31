@@ -103,6 +103,9 @@ class acp
 			$fields = [
 				'share_social_networks' => $this->helper->filter_empty_items(
 					$this->request->variable('share_social_networks', [0 => ''])
+				),
+				'share_social_networks_order' => $this->helper->filter_empty_items(
+					explode(',', $this->request->variable('share_social_networks_order', ''))
 				)
 			];
 
@@ -112,14 +115,16 @@ class acp
 				// Data helpers
 				$field = 'share_social_networks';
 				$diff = array_diff($fields[$field], array_keys($allowed));
+				$ordered = array_diff($fields[sprintf('%s_order', $field)], $fields[$field]);
 
 				// Enabled (input) values must be in the allowed values
-				if (!empty($diff))
+				if (!empty($diff) || !empty($ordered))
 				{
+					$values = array_merge($diff, $ordered);
 					$errors[]['message'] = $this->language->lang(
 						'ACP_SHARE_VALIDATE_VALUES_NOT_ALLOWED',
 						$this->language->lang('ACP_' . strtoupper($field)),
-						implode(',', $diff)
+						implode(',', $values)
 					);
 				}
 				else

@@ -3,6 +3,11 @@
 	padding: 0;
 }
 
+#share-settings .share-item {
+	font-size: 1em;
+	margin-bottom: 0;
+}
+
 #share-settings .share-link {
 	display: inline-block;
 }
@@ -29,7 +34,6 @@
 	margin-top: 0;
 }
 
-#share-settings .share-item {
-	font-size: 1em;
-	margin-bottom: 0;
+.share-preview .share-item-disabled {
+	filter: opacity(30%) grayscale(100%);
 }

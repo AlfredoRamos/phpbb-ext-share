@@ -47,6 +47,7 @@
 	<fieldset class="share-preview">
 		<legend>{{ lang('PREVIEW') }}</legend>
 		{% include '@alfredoramos_share/share_links.html' ignore missing %}
+		<input type="hidden" name="share_social_networks_order" value="{{ SHARE_SOCIAL_NETWORKS|filter(NETWORK => NETWORK.ENABLED)|map(NETWORK => NETWORK.KEY)|join(',')|striptags|escape }}">
 	</fieldset>
 
 	<fieldset>
