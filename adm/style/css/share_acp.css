@@ -1,27 +1,35 @@
-#share_settings .share-table th + th {
-	text-align: center;
-}
-
-#share_settings .share-table td {
-	font-size: 1em;
-}
-
-#share_settings .share-list {
-	text-align: left;
-	user-select: none;
-	margin-top: 0;
-}
-
-#share_settings .share-item {
-	font-size: 1em;
-	margin-bottom: 0;
-}
-
 #share_settings label {
 	font-size: 1em;
 	padding: 0;
 }
 
-#share_settings .share-link {
+#share-settings .share-link {
 	display: inline-block;
+}
+
+.share-table th + th {
+	text-align: center;
+}
+
+.share-table td {
+	font-size: 1em;
+}
+
+.share-table tr > td {
+	width: 20%;
+}
+
+.share-table .share-item {
+	margin-right: 0;
+}
+
+.share-preview .share-list {
+	text-align: left;
+	user-select: none;
+	margin-top: 0;
+}
+
+#share-settings .share-item {
+	font-size: 1em;
+	margin-bottom: 0;
 }

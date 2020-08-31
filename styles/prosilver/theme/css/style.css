@@ -9,7 +9,7 @@
 }
 
 .share-item:last-child {
-	margin-right: none;
+	margin-right: 0;
 }
 
 .share-link > .share-icon {

@@ -2,7 +2,7 @@
 {%- import '@alfredoramos_share/social_icon.html' as share -%}
 
 <h1>{{ lang('ACP_SHARE_SETTINGS') }}</h1>
-{{ lang('ACP_SHARE_SETTINGS_EXPLAIN') }}
+<p>{{ lang('ACP_SHARE_SETTINGS_EXPLAIN') }}</p>
 
 {% if VALIDATION_ERRORS %}
 <div class="errorbox">
@@ -16,54 +16,37 @@
 	<strong>{{ lang('ACP_SHARE_SETTINGS_WARNING') }}</strong>
 </div>
 
-<form id="share_settings" method="POST" action="{{ U_ACTION }}">
-	<fieldset>
-		<legend>{{ lang('ACP_SHARE_SOCIAL_NETWORKS') }}</legend>
-		{% if SHARE_SOCIAL_NETWORKS is not empty %}
-		<div class="share-list">
-			{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS %}
-			<div class="share-item">
-				<label>
-					<input type="checkbox" name="share_social_networks[]" value="{{ SOCIAL_NETWORK.KEY|striptags|escape}}"{% if SOCIAL_NETWORK.ENABLED %} checked="checked"{% endif %}>
-					<span class="share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}" title="{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}">
-						{{ share.social_icon(SOCIAL_NETWORK.ICON) }}
-					</span>
-					<span class="share-link-title">{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}</span>
-				</label>
-			</div>
-			{% endfor %}
-		</div>
-		{% endif %}
-	</fieldset>
-
+<form id="share-settings" method="POST" action="{{ U_ACTION }}">
 	<table id="share-social-network-list" class="table1 responsive zebra-table share-list share-table">
 		<thead>
 			<tr>
-				<th>{{ lang('SHARE_SOCIAL_NETWORK') }}</th>
-				<th>{{ lang('ENABLED') }}</th>
+				<th colspan="4">{{ lang('ACP_SHARE_SOCIAL_NETWORKS') }}</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS %}
+			{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS|batch(4, '') %}
 			<tr class="row-highlight">
+				{% for NETWORK in SOCIAL_NETWORK %}
+				{% if NETWORK %}
 				<td>
-					<label for="share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}" class="share-item">
-						<span class="share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}" title="{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}">
-							{{ share.social_icon(SOCIAL_NETWORK.ICON) }}
+					<label for="share-link-{{ NETWORK.KEY|striptags|escape}}" class="share-item">
+						<input type="checkbox" name="share_social_networks[]" value="{{ NETWORK.KEY|striptags|escape}}"{% if NETWORK.ENABLED %} checked="checked"{% endif %}>
+						<span class="share-link share-link-{{ NETWORK.KEY|striptags|escape}}" title="{{ lang(NETWORK.LANG)|striptags|escape }}">
+							{{ share.social_icon(NETWORK.ICON) }}
 						</span>
-						<span class="share-link-title">{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}</span>
+						<span class="share-link-title">{{ lang(NETWORK.LANG)|striptags|escape }}</span>
 					</label>
 				</td>
-				<td class="actions">
-					<input type="checkbox" id="share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}" name="share_social_networks[]" value="{{ SOCIAL_NETWORK.KEY|striptags|escape}}"{% if SOCIAL_NETWORK.ENABLED %} checked="checked"{% endif %}>
-				</td>
+				{% endif %}
+				{% endfor %}
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
-	<fieldset>
+	<fieldset class="share-preview">
 		<legend>{{ lang('PREVIEW') }}</legend>
+		{% include '@alfredoramos_share/share_links.html' ignore missing %}
 	</fieldset>
 
 	<fieldset>

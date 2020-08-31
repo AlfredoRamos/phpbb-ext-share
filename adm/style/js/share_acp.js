@@ -2,7 +2,7 @@
 	'use strict';
 
 	// Sort container
-	const container = document.body.querySelector('.share-list');
+	const container = document.body.querySelector('.share-preview > .share-list');
 
 	// There is nothing to do
 	if (!container) {
