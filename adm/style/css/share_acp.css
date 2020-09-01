@@ -34,6 +34,10 @@
 	margin-top: 0;
 }
 
+.share-preview .share-item {
+	cursor: move;
+}
+
 .share-preview .share-item-disabled {
 	filter: opacity(30%) grayscale(100%);
 }

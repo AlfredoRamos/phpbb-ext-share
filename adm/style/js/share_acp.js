@@ -3,6 +3,7 @@
 
 	// Sort container
 	const container = document.body.querySelector('.share-preview > .share-list');
+	let timer = null;
 
 	// There is nothing to do
 	if (!container) {
@@ -21,32 +22,54 @@
 		warning.setAttribute('data-triggered', 'true');
 	};
 
+	/**
+	 * TODO: Update field value
+	 */
+	const updateNetworksOrder = function() {
+		displayWarning();
+
+		timer = setTimeout(function() {
+			const networks = Array.prototype.slice.call(container.children).filter(function(network) {
+				return !network.classList.contains('share-item-disabled');
+			});
+
+			if (networks.length <= 0) {
+				return;
+			}
+
+			const field = container.parentNode.querySelector('[name="share_social_networks_order"]');
+
+			if (!field) {
+				return;
+			}
+
+			let networkList = [];
+
+			networks.forEach(function(item) {
+				if (!item || !item.hasAttribute('data-network')) {
+					return;
+				}
+
+				networkList.push(item.getAttribute('data-network'));
+			});
+
+			if (networkList.length <= 0) {
+				return;
+			}
+
+			field.value = networkList.join(',');
+
+			clearTimeout(timer);
+		}, 200);
+	};
+
 	// Sort
 	const sortable = new Sortable.create(container, {
 		handle: '.share-item',
 		animation: 150,
 		ghostClass: 'share-item-ghost',
-		onSort: displayWarning
+		onEnd: updateNetworksOrder
 	});
-
-	/**
-	 * TODO: Update field value
-	 */
-	const updateNetworksOrder = function() {
-		const networks = Array.prototype.slice.call(container.children).filter(function(network) {
-			return !network.classList.contains('share-item-disabled');
-		});
-
-		if (networks.length <= 0) {
-			return;
-		}
-
-		const field = container.parentNode.querySelector('[name="share_social_networks_order"]');
-
-		if (!field) {
-			return;
-		}
-	};
 
 	// TODO: Call updateNetworksOrder()
 	document.body.addEventListener('change', function(e) {
@@ -63,6 +86,7 @@
 		}
 
 		link.classList.toggle('share-item-disabled', !checkbox.checked);
+		updateNetworksOrder();
 		displayWarning();
 	});
 })();

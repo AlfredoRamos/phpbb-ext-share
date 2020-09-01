@@ -135,6 +135,13 @@ class acp
 						$fields[$field] = implode(',', $fields[$field]);
 					}
 
+					// Ordered networks must match the ones enabled
+					// Use the ordered values
+					if (empty($ordered))
+					{
+						$fields[$field] = $fields[sprintf('%s_order', $field)];
+					}
+
 					// Save configuration
 					$this->config->set($field, $fields[$field]);
 
@@ -145,7 +152,7 @@ class acp
 						$this->user->ip,
 						'LOG_SHARE_DATA',
 						false,
-						[$this->language->lang('ACP_SHARE_SETTINGS')]
+						[$this->language->lang('SETTINGS')]
 					);
 
 					// Confirm dialog
