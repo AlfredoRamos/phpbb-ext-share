@@ -86,7 +86,7 @@ class helper
 		}
 
 		// Remove SID from URL
-		$url = preg_replace('#sid=\w{0,128}#', '', $url);
+		$url = preg_replace('#(?:&amp;)?sid=\w{0,128}#', '', $url);
 		$url = str_replace('?&amp;', '?', $url);
 
 		// Remove index.php without parameters

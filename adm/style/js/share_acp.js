@@ -5,12 +5,12 @@
 	const container = document.body.querySelector('.share-preview > .share-list');
 	let timer = null;
 
-	// There is nothing to do
+	// Preview container must exist
 	if (!container) {
 		return;
 	}
 
-	// Sort event
+	// Warning handler
 	const displayWarning = function(e) {
 		const warning = document.body.querySelector('.warningbox');
 
@@ -22,9 +22,7 @@
 		warning.setAttribute('data-triggered', 'true');
 	};
 
-	/**
-	 * TODO: Update field value
-	 */
+	// Update sorted preview
 	const updateNetworksOrder = function() {
 		displayWarning();
 
@@ -63,7 +61,7 @@
 		}, 200);
 	};
 
-	// Sort
+	// Sort handler
 	const sortable = new Sortable.create(container, {
 		handle: '.share-item',
 		animation: 150,
@@ -71,7 +69,7 @@
 		onEnd: updateNetworksOrder
 	});
 
-	// TODO: Call updateNetworksOrder()
+	// Update preview
 	document.body.addEventListener('change', function(e) {
 		const checkbox = e.target.closest('[name="share_social_networks[]"]');
 

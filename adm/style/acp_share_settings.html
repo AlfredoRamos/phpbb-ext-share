@@ -17,6 +17,7 @@
 </div>
 
 <form id="share-settings" method="POST" action="{{ U_ACTION }}">
+	{% if SHARE_SOCIAL_NETWORKS_ALLOWED %}
 	<table id="share-social-network-list" class="table1 responsive zebra-table share-list share-table">
 		<thead>
 			<tr>
@@ -24,13 +25,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS|batch(4, '') %}
+			{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS_ALLOWED|batch(4, '') %}
+			{% if SOCIAL_NETWORK %}
 			<tr class="row-highlight">
 				{% for NETWORK in SOCIAL_NETWORK %}
 				{% if NETWORK %}
 				<td>
 					<label for="share-link-{{ NETWORK.KEY|striptags|escape}}" class="share-item">
-						<input type="checkbox" name="share_social_networks[]" value="{{ NETWORK.KEY|striptags|escape}}"{% if NETWORK.ENABLED %} checked="checked"{% endif %}>
+						<input type="checkbox" name="share_social_networks[]" id="share-link-{{ NETWORK.KEY|striptags|escape}}" value="{{ NETWORK.KEY|striptags|escape}}"{% if NETWORK.ENABLED %} checked="checked"{% endif %}>
 						<span class="share-link share-link-{{ NETWORK.KEY|striptags|escape}}" title="{{ lang(NETWORK.LANG)|striptags|escape }}">
 							{{ share.social_icon(NETWORK.ICON) }}
 						</span>
@@ -40,15 +42,19 @@
 				{% endif %}
 				{% endfor %}
 			</tr>
+			{% endif %}
 			{% endfor %}
 		</tbody>
 	</table>
+	{% endif %}
 
+	{% if SHARE_SOCIAL_NETWORKS_SORTED %}
 	<fieldset class="share-preview">
 		<legend>{{ lang('PREVIEW') }}</legend>
 		{% include '@alfredoramos_share/share_links.html' ignore missing %}
-		<input type="hidden" name="share_social_networks_order" value="{{ SHARE_SOCIAL_NETWORKS|filter(NETWORK => NETWORK.ENABLED)|map(NETWORK => NETWORK.KEY)|join(',')|striptags|escape }}">
+		<input type="hidden" name="share_social_networks_order" value="{{ SHARE_SOCIAL_NETWORKS_SORTED|filter(NETWORK => NETWORK.ENABLED)|map(NETWORK => NETWORK.KEY)|join(',')|striptags|escape }}">
 	</fieldset>
+	{% endif %}
 
 	<fieldset>
 		<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>

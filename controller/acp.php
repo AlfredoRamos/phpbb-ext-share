@@ -84,6 +84,9 @@ class acp
 		// Enabled values
 		$enabled = $this->helper->enabled_social_networks();
 
+		// Sorted values
+		$sorted = array_merge($enabled, array_diff(array_keys($allowed), $enabled));
+
 		// Validation errors
 		$errors = [];
 
@@ -129,17 +132,17 @@ class acp
 				}
 				else
 				{
-					// Convert enabled values (array) to string
-					if (is_array($fields[$field]))
-					{
-						$fields[$field] = implode(',', $fields[$field]);
-					}
-
 					// Ordered networks must match the ones enabled
 					// Use the ordered values
 					if (empty($ordered))
 					{
 						$fields[$field] = $fields[sprintf('%s_order', $field)];
+					}
+
+					// Convert enabled values (array) to string
+					if (is_array($fields[$field]))
+					{
+						$fields[$field] = implode(',', $fields[$field]);
 					}
 
 					// Save configuration
@@ -172,11 +175,27 @@ class acp
 				return;
 			}
 
-			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS', [
+			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS_ALLOWED', [
 				'KEY' => $key,
 				'ICON' => $value['icon'],
 				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $key))),
 				'ENABLED' => in_array($key, $enabled, true)
+			]);
+		}
+
+		// Assign sorted values
+		foreach ($sorted as $value)
+		{
+			if (empty($value))
+			{
+				return;
+			}
+
+			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS_SORTED', [
+				'KEY' => $value,
+				'ICON' => trim($allowed[$value]['icon']),
+				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $value))),
+				'ENABLED' => in_array($value, $enabled, true)
 			]);
 		}
 
