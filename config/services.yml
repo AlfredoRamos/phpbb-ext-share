@@ -6,6 +6,11 @@ services:
 
     alfredoramos.share.helper:
         class: alfredoramos\share\includes\helper
+        arguments:
+          - '@config'
+          - '@template'
+          - '@language'
+          - '@controller.helper'
 
     alfredoramos.share.controller.acp:
         class: alfredoramos\share\controller\acp

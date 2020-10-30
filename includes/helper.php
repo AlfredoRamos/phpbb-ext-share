@@ -1,13 +1,18 @@
 <?php
 
 /**
- * Share Buttons extension for phpBB.
+ * Share Links extension for phpBB.
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
  * @copyright 2020 Alfredo Ramos
  * @license GPL-2.0-only
  */
 
 namespace alfredoramos\share\includes;
+
+use phpbb\config\config;
+use phpbb\template\template;
+use phpbb\language\language;
+use phpbb\controller\helper as controller_helper;
 
 class helper
 {
@@ -16,14 +21,12 @@ class helper
 	protected $language;
 	protected $controller_helper;
 
-	public function __construct()
+	public function __construct(config $config, template $template, language $language, controller_helper $controller_helper)
 	{
-		global $config, $template, $phpbb_container;
-
 		$this->config = $config;
 		$this->template = $template;
-		$this->language = $phpbb_container->get('language');
-		$this->controller_helper = $phpbb_container->get('controller.helper');
+		$this->language = $language;
+		$this->controller_helper = $controller_helper;
 	}
 
 	public function share_buttons($title = '')
@@ -53,8 +56,7 @@ class helper
 				'KEY' => $network,
 				'URL' => $this->clean_url(vsprintf($allowed[$network]['url'], $data)),
 				'ICON' => $allowed[$network]['icon'],
-				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $network))),
-				'NEWTAB' => !empty($allowed[$network]['newtab'])
+				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $network)))
 			]);
 		}
 	}
@@ -217,7 +219,7 @@ class helper
 				'url'	=> 'https://www.diigo.com/post?title=%2$s&url=%1$s',
 				'icon'	=> 'brandico:diigo'
 			],
-			'linkedin'			=> [
+			'linkedin'		=> [
 				'url'	=> 'https://www.linkedin.com/sharing/share-offsite/?url=%1$s',
 				'icon'	=> 'brandico:linkedin'
 			],
@@ -234,25 +236,6 @@ class helper
 				'icon'	=> 'mdi:cellphone-message'
 			]
 		];
-
-		// Do not open in a new tab
-		$exclude_newtab = [
-			'whatsapp',
-			'telegram',
-			'email',
-			'sms'
-		];
-
-		// Set new tab option
-		foreach ($social_networks as $network => $values)
-		{
-			if (array_key_exists('newtab', $values))
-			{
-				continue;
-			}
-
-			$social_networks[$network]['newtab'] = !in_array($network, $exclude_newtab, true);
-		}
 
 		$key = trim($key);
 

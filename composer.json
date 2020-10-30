@@ -1,11 +1,11 @@
 {
 	"name": "alfredoramos/share",
 	"type": "phpbb-extension",
-	"description": "Share Buttons extension for phpBB",
+	"description": "Share Links extension for phpBB",
 	"homepage": "https://github.com/AlfredoRamos/phpbb-ext-share",
 	"version": "0.1.0-dev",
 	"time": "2020-04-08",
-	"keywords": ["phpbb", "extension", "share-buttons"],
+	"keywords": ["phpbb", "extension", "share-link", "share-buttons"],
 	"license": "GPL-2.0-only",
 	"authors": [
 		{
@@ -27,7 +27,7 @@
 		"alfredoramos/seometadata": "To add meta data for social media"
 	},
 	"extra": {
-		"display-name": "Share Buttons",
+		"display-name": "Share Links",
 		"soft-require": {
 			"phpbb/phpbb": "~3.3.0"
 		},

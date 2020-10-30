@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Share Buttons extension for phpBB.
+ * Share Links extension for phpBB.
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
  * @copyright 2020 Alfredo Ramos
  * @license GPL-2.0-only
@@ -24,6 +24,6 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACP_SHARE' => 'Share Buttons',
-	'LOG_SHARE_DATA' => '<strong>Share Buttons data changed</strong><br>» %s'
+	'ACP_SHARE' => 'Share Links',
+	'LOG_SHARE_DATA' => '<strong>Share Links data changed</strong><br>» %s'
 ]);
