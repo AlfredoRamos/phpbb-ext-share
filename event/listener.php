@@ -10,23 +10,23 @@
 namespace alfredoramos\share\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use alfredoramos\share\includes\helper;
 
 class listener implements EventSubscriberInterface
 {
 	protected $helper;
 
-	public function __construct()
+	public function __construct(helper $helper)
 	{
-		global $phpbb_container;
-
-		$this->helper = $phpbb_container->get('alfredoramos.share.helper');
+		$this->helper = $helper;
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return [
 			'core.user_setup' => 'user_setup',
-			'core.viewtopic_modify_page_title' => 'viewtopic'
+			'core.viewtopic_modify_post_row' => 'post_row',
+			'core.viewtopic_post_row_after' => 'post_template'
 		];
 	}
 
@@ -40,15 +40,18 @@ class listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-	public function viewtopic($event)
+	public function post_row($event)
 	{
-		$title = $event['topic_data']['topic_title'];
+		$event['post_row'] = $this->helper->add_post_row_data($event['post_row']);
+	}
 
-		if (empty($title))
-		{
-			return;
-		}
-		
-		$this->helper->share_buttons($title);
+	public function post_template($event)
+	{
+		$this->helper->assign_post_template_vars(
+			(int) $event['post_row']['POST_ID'],
+			(string) $event['post_row']['POST_SUBJECT'],
+			(bool) $event['post_row']['S_FIRST_POST'],
+			(int) $event['row']['topic_id']
+		);
 	}
 }

@@ -1,12 +1,12 @@
 {%- if share.social_icon is not defined -%}
 {%- import '@alfredoramos_share/social_icon.html' as share -%}
 {%- endif -%}
-{% if SHARE_SOCIAL_NETWORKS and share.social_icon is defined %}
+{% if postrow.share_social_networks|length > 0 %}
 {% apply spaceless %}
 <section class="share-list">
-	{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS %}
-	<a class="share-item share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}" href="{{ SOCIAL_NETWORK.URL }}" rel="external nofollow noreferrer noopener" title="{{ lang(SOCIAL_NETWORK.LANG)|striptags|escape }}">
-		{{ share.social_icon(SOCIAL_NETWORK.ICON) }}
+	{% for social_network in postrow.share_social_networks %}
+	<a class="share-item share-link share-link-{{ social_network.key|striptags|escape}}" href="{% if postrow.U_SHARE_POST %}{{ postrow.U_SHARE_POST }}{% else %}{{ social_network.url }}{% endif %}" rel="external nofollow noreferrer noopener" title="{{ lang(social_network.name)|striptags|escape }}">
+		{{ share.social_icon(social_network.icon) }}
 	</a>
 	{% endfor %}
 </section>

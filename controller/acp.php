@@ -78,6 +78,9 @@ class acp
 			return;
 		}
 
+		// Allowed types
+		$types = ['topic', 'post'];
+
 		// Allowed values
 		$allowed = $this->helper->social_networks();
 
@@ -104,6 +107,7 @@ class acp
 
 			// Form data
 			$fields = [
+				'share_type' => $this->request->variable('share_type', 'topic'),
 				'share_social_networks' => $this->helper->filter_empty_items(
 					$this->request->variable('share_social_networks', [0 => ''])
 				),
@@ -112,7 +116,17 @@ class acp
 				)
 			];
 
-			// Validation check
+			// Validate type
+			if (!in_array($fields['share_type'], $types, true))
+			{
+				$errors[]['message'] = $this->language->lang(
+					'ACP_SHARE_VALIDATE_VALUES_NOT_ALLOWED',
+					$this->language->lang('ACP_SHARE_TYPE'),
+					$fields['share_type']
+				);
+			}
+
+			// Validate social networks
 			if (!empty($fields['share_social_networks']))
 			{
 				// Data helpers
@@ -144,27 +158,46 @@ class acp
 					{
 						$fields[$field] = implode(',', $fields[$field]);
 					}
-
-					// Save configuration
-					$this->config->set($field, $fields[$field]);
-
-					// Admin log
-					$this->log->add(
-						'admin',
-						$this->user->data['user_id'],
-						$this->user->ip,
-						'LOG_SHARE_DATA',
-						false,
-						[$this->language->lang('SETTINGS')]
-					);
-
-					// Confirm dialog
-					trigger_error(
-						$this->language->lang('CONFIG_UPDATED') .
-						adm_back_link($u_action)
-					);
 				}
 			}
+
+			// Save configuration
+			if (empty($errors))
+			{
+				// Cleanup
+				unset($fields[sprintf('%s_order', $field)]);
+
+				// Update configuration
+				foreach ($fields as $key => $value)
+				{
+					$this->config->set($key, $value);
+				}
+
+				// Admin log
+				$this->log->add(
+					'admin',
+					$this->user->data['user_id'],
+					$this->user->ip,
+					'LOG_SHARE_DATA',
+					false,
+					[$this->language->lang('SETTINGS')]
+				);
+
+				// Confirm dialog
+				trigger_error(
+					$this->language->lang('CONFIG_UPDATED') .
+					adm_back_link($u_action)
+				);
+			}
+		}
+
+		// Assign allowed types
+		foreach ($types as $value) {
+			$this->template->assign_block_vars('SHARE_TYPES', [
+				'KEY' => $value,
+				'NAME' => sprintf('ACP_SHARE_%s', strtoupper($value)),
+				'ENABLED' => ($this->config['share_type'] === $value)
+			]);
 		}
 
 		// Assign allowed values
@@ -178,7 +211,7 @@ class acp
 			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS_ALLOWED', [
 				'KEY' => $key,
 				'ICON' => $value['icon'],
-				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $key))),
+				'NAME' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $key))),
 				'ENABLED' => in_array($key, $enabled, true)
 			]);
 		}

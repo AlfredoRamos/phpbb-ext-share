@@ -17,6 +17,25 @@
 </div>
 
 <form id="share-settings" method="POST" action="{{ U_ACTION }}">
+	{% if SHARE_TYPES %}
+	<fieldset>
+		<legend>{{ lang('SETTINGS') }}</legend>
+		<dl>
+			<dt>
+				<label for="share_type">{{ lang('ACP_SHARE_TYPE') }}</label>
+				<br><span>{{ lang('ACP_SHARE_TYPE_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<select id="share_type" name="share_type">
+					{% for TYPE in SHARE_TYPES %}
+					<option value="{{ TYPE.KEY }}"{% if TYPE.ENABLED %} selected="selected"{% endif %}>{{ lang(TYPE.NAME) }}</option>
+					{% endfor %}
+				</select>
+			</dd>
+		</dl>
+	</fieldset>
+	{% endif %}
+
 	{% if SHARE_SOCIAL_NETWORKS_ALLOWED %}
 	<table id="share-social-network-list" class="table1 responsive zebra-table share-list share-table">
 		<thead>
@@ -36,7 +55,7 @@
 						<span class="share-link share-link-{{ NETWORK.KEY|striptags|escape}}" title="{{ lang(NETWORK.LANG)|striptags|escape }}">
 							{{ share.social_icon(NETWORK.ICON) }}
 						</span>
-						<span class="share-link-title">{{ lang(NETWORK.LANG)|striptags|escape }}</span>
+						<span class="share-link-title">{{ lang(NETWORK.NAME)|striptags|escape }}</span>
 					</label>
 				</td>
 				{% endif %}

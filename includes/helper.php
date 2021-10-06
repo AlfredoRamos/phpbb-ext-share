@@ -20,20 +20,59 @@ class helper
 	protected $template;
 	protected $language;
 	protected $controller_helper;
+	protected $root_path;
+	protected $php_ext;
 
-	public function __construct(config $config, template $template, language $language, controller_helper $controller_helper)
+	public function __construct(config $config, template $template, language $language, controller_helper $controller_helper, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->template = $template;
 		$this->language = $language;
 		$this->controller_helper = $controller_helper;
+		$this->root_path = $root_path;
+		$this->php_ext = $php_ext;
 	}
 
-	public function share_buttons($title = '')
+	public function add_post_row_data(array $post_row = [])
 	{
-		$title = trim($title);
+		if (empty($post_row))
+		{
+			return [];
+		}
 
-		if (empty($title))
+		$type = $this->config['share_type'];
+
+		if (empty($type))
+		{
+			return $post_row;
+		}
+
+		switch ($type)
+		{
+			case 'topic':
+				if ($post_row['S_FIRST_POST'] === true)
+				{
+					$show_links = true;
+				}
+			break;
+
+			case 'post':
+				$show_links = true;
+			break;
+
+			default:
+				$show_links = false;
+			break;
+		}
+
+		return array_merge($post_row, [
+			'S_SHARE_LINKS' => $show_links
+		]);
+	}
+
+	public function assign_post_template_vars(int $post_id = 0, string $post_subject, bool $first_post = false, int $topic_id = 0)
+	{
+		if (empty($post_id) || empty($post_subject))
 		{
 			return;
 		}
@@ -41,9 +80,20 @@ class helper
 		$allowed = $this->social_networks();
 		$enabled = $this->enabled_social_networks();
 		$data = [
-			$this->clean_url($this->controller_helper->get_current_url(), true),
-			utf8_htmlspecialchars($title)
+			$this->clean_url(
+				$this->root_path . 'viewtopic.' . $this->php_ext . '?p=' . $post_id,
+				true, true
+			),
+			rawurlencode($post_subject)
 		];
+
+		if ($first_post === true && !empty($topic_id))
+		{
+			$data[0] = $this->clean_url(
+				$this->root_path . 'viewtopic.' . $this->php_ext . '?t=' . $topic_id,
+				true, true
+			);
+		}
 
 		foreach ($enabled as $network)
 		{
@@ -52,11 +102,11 @@ class helper
 				return;
 			}
 
-			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS', [
-				'KEY' => $network,
-				'URL' => $this->clean_url(vsprintf($allowed[$network]['url'], $data)),
-				'ICON' => $allowed[$network]['icon'],
-				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $network)))
+			$this->template->assign_block_vars('postrow.share_social_networks', [
+				'key' => $network,
+				'url' => $this->clean_url(vsprintf($allowed[$network]['url'], $data)),
+				'icon' => $allowed[$network]['icon'],
+				'name' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $network)))
 			]);
 		}
 	}
@@ -69,7 +119,7 @@ class helper
 	 *
 	 * @return string
 	 */
-	public function clean_url($url = '', $encode = false)
+	public function clean_url(string $url = '', bool $encode = false, bool $absolute = false)
 	{
 		$url = trim($url);
 
@@ -101,6 +151,12 @@ class helper
 			$url = urlencode($url);
 		}
 
+		// Absolute URL
+		if (!empty($absolute)) {
+			$url = ($url[0] === '.') ? substr_replace($url, '', 0, 1) : $url;
+			$url = generate_board_url() . $url;
+		}
+
 		// Return URL
 		return $url;
 	}
@@ -114,7 +170,7 @@ class helper
 	 *
 	 * @return array
 	 */
-	public function filter_empty_items($data = [], $max_depth = 5, $depth = 0)
+	public function filter_empty_items(array $data = [], int $max_depth = 5, int $depth = 0)
 	{
 		if (empty($data))
 		{
@@ -166,7 +222,7 @@ class helper
 		return $enabled;
 	}
 
-	public function social_networks($key = '')
+	public function social_networks(string $key = '')
 	{
 		// %1$s => URL
 		// %2$s => Text

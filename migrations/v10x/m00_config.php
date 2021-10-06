@@ -23,6 +23,10 @@ class m00_config extends migration
 		return [
 			[
 				'config.add',
+				['share_type', 'topic']
+			],
+			[
+				'config.add',
 				['share_social_networks', '']
 			]
 		];

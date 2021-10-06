@@ -1,6 +1,8 @@
 services:
     alfredoramos.share.listener:
         class: alfredoramos\share\event\listener
+        arguments:
+          - '@alfredoramos.share.helper'
         tags:
             - { name: event.listener }
 
@@ -11,6 +13,8 @@ services:
           - '@template'
           - '@language'
           - '@controller.helper'
+          - '%core.root_path%'
+          - '%core.php_ext%'
 
     alfredoramos.share.controller.acp:
         class: alfredoramos\share\controller\acp
