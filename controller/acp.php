@@ -19,37 +19,37 @@ use alfredoramos\share\includes\helper;
 
 class acp
 {
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\template\template */
+	/** @var template */
 	protected $template;
 
-	/** @var \phpbb\request\request */
+	/** @var request */
 	protected $request;
 
-	/** @var \phpbb\language\language */
+	/** @var language */
 	protected $language;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
-	/** @var \phpbb\log\log */
+	/** @var log */
 	protected $log;
 
-	/** @var \alfredoramos\share\includes\helper */
+	/** @var helper */
 	protected $helper;
 
 	/**
 	 * Controller constructor.
 	 *
-	 * @param \phpbb\config\config					$config
-	 * @param \phpbb\template\template				$template
-	 * @param \phpbb\request\request				$request
-	 * @param \phpbb\language\language				$language
-	 * @param \phpbb\user							$user
-	 * @param \phpbb\log\log						$log
-	 * @param \alfredoramos\share\includes\helper	$helper
+	 * @param config	$config
+	 * @param template	$template
+	 * @param request	$request
+	 * @param language	$language
+	 * @param user		$user
+	 * @param log		$log
+	 * @param helper	$helper
 	 *
 	 * @return void
 	 */
@@ -192,7 +192,8 @@ class acp
 		}
 
 		// Assign allowed types
-		foreach ($types as $value) {
+		foreach ($types as $value)
+		{
 			$this->template->assign_block_vars('SHARE_TYPES', [
 				'KEY' => $value,
 				'NAME' => sprintf('ACP_SHARE_%s', strtoupper($value)),

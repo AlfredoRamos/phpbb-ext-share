@@ -23,7 +23,7 @@ class helper
 	protected $root_path;
 	protected $php_ext;
 
-	public function __construct(config $config, template $template, language $language, controller_helper $controller_helper, $root_path, $php_ext)
+	public function __construct(config $config, template $template, language $language, controller_helper $controller_helper, string $root_path, string $php_ext)
 	{
 		$this->config = $config;
 		$this->template = $template;
@@ -70,7 +70,7 @@ class helper
 		]);
 	}
 
-	public function assign_post_template_vars(int $post_id = 0, string $post_subject, bool $first_post = false, int $topic_id = 0)
+	public function assign_post_template_vars(int $post_id = 0, string $post_subject = '', bool $first_post = false, int $topic_id = 0)
 	{
 		if (empty($post_id) || empty($post_subject))
 		{
@@ -152,7 +152,8 @@ class helper
 		}
 
 		// Absolute URL
-		if (!empty($absolute)) {
+		if (!empty($absolute))
+		{
 			$url = ($url[0] === '.') ? substr_replace($url, '', 0, 1) : $url;
 			$url = generate_board_url() . $url;
 		}
