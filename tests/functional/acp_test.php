@@ -16,10 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class acp_test extends \phpbb_functional_test_case
 {
-	static protected function setup_extensions()
-	{
-		return ['alfredoramos/share'];
-	}
+	use functional_test_case_trait;
 
 	protected function setUp(): void
 	{
