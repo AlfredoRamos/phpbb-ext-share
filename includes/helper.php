@@ -47,6 +47,8 @@ class helper
 			return $post_row;
 		}
 
+		$show_links = false;
+
 		switch ($type)
 		{
 			case 'topic':
@@ -58,10 +60,6 @@ class helper
 
 			case 'post':
 				$show_links = true;
-			break;
-
-			default:
-				$show_links = false;
 			break;
 		}
 
@@ -95,11 +93,18 @@ class helper
 			);
 		}
 
+		$with_spaces = ['whatsapp', 'whatsapp-web', 'sms'];
+
 		foreach ($enabled as $network)
 		{
 			if (empty($allowed[$network]['url']) || empty($allowed[$network]['icon']))
 			{
 				return;
+			}
+
+			if (in_array($network, $with_spaces, true))
+			{
+				$data[2] = rawurlencode(' ');
 			}
 
 			$this->template->assign_block_vars('postrow.share_social_networks', [
@@ -115,11 +120,12 @@ class helper
 	 * Clean URL to be used as HTML attribute value.
 	 *
 	 * @param string	$url
+	 * @param bool		$absolute
 	 * @param bool		$encode
 	 *
 	 * @return string
 	 */
-	public function clean_url(string $url = '', bool $encode = false, bool $absolute = false)
+	public function clean_url(string $url = '', bool $absolute = false, bool $encode = false)
 	{
 		$url = trim($url);
 
@@ -144,18 +150,18 @@ class helper
 		// Remove index.php without parameters
 		$url = preg_replace('#index\.' . $this->php_ext . '$#', '', $url);
 
-		// Encode URL
-		if (!empty($encode))
-		{
-			$url = str_replace('&amp;', '&', $url);
-			$url = urlencode($url);
-		}
-
 		// Absolute URL
 		if (!empty($absolute))
 		{
 			$url = ($url[0] === '.') ? substr_replace($url, '', 0, 1) : $url;
 			$url = generate_board_url() . $url;
+		}
+
+		// Encode URL
+		if (!empty($encode))
+		{
+			$url = str_replace('&amp;', '&', $url);
+			$url = rawurlencode($url);
 		}
 
 		// Return URL
@@ -229,11 +235,11 @@ class helper
 		// %2$s => Text
 		$social_networks = [
 			'whatsapp'		=> [
-				'url'	=> 'https://wa.me/?text=%2$s %1$s',
+				'url'	=> 'https://wa.me/?text=%2$s%3$s%1$s',
 				'icon'	=> 'dashicons:whatsapp'
 			],
 			'whatsapp-web'	=> [
-				'url'	=> 'https://web.whatsapp.com/send?text=%2$s %1$s',
+				'url'	=> 'https://web.whatsapp.com/send?text=%2$s%3$s%1$s',
 				'icon'	=> 'dashicons:whatsapp'
 			],
 			'telegram'		=> [
@@ -289,7 +295,7 @@ class helper
 				'icon'	=> 'dashicons:email-alt'
 			],
 			'sms'			=> [
-				'url'	=> 'sms:?body=%2$s %1$s',
+				'url'	=> 'sms:?body=%2$s%3$s%1$s',
 				'icon'	=> 'mdi:cellphone-message'
 			]
 		];
