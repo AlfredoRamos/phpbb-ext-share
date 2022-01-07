@@ -68,6 +68,10 @@
 	{% endif %}
 
 	{% if SHARE_SOCIAL_NETWORKS_SORTED %}
+	<div class="errorbox notice">
+		<p style="font-size: 1em;">{{ lang('ACP_SHARE_PREVIEW_EXPLAIN') }}</p>
+	</div>
+
 	<fieldset class="share-preview">
 		<legend>{{ lang('PREVIEW') }}</legend>
 		{% include '@alfredoramos_share/share_links.html' ignore missing %}
