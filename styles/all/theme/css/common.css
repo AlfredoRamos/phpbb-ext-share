@@ -1,7 +1,7 @@
 .share-list,
-.share-list *
-.share-list *::before,
-.share-list *::after {
+.share-list *,
+.share-list *:before,
+.share-list *:after {
 	box-sizing: border-box;
 }
 

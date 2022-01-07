@@ -18,13 +18,18 @@
 		<echo msg="Cleaning files and directories" />
 
 		<delete dir="${dir}/tests" />
+		<delete dir="${dir}/node_modules" />
 		<delete dir="${dir}/.github"/>
 		<delete file="${dir}/.gitignore" />
 		<delete file="${dir}/.gitattributes" />
+		<delete file="${dir}/.stylelintrc.json" />
 		<delete file="${dir}/build.xml" />
 		<delete file="${dir}/crowdin.yml" />
 		<delete file="${dir}/phpunit.xml.dist" />
 		<delete file="${dir}/README.md" />
+		<delete file="${dir}/package.json" />
+		<delete file="${dir}/package-lock.json" />
+		<delete file="${dir}/postcss.config.js" />
 
 		<if>
 			<and>
@@ -98,12 +103,10 @@
 	</target>
 
 	<!-- Minify CSS and JS assets -->
-	<!--
 	<target name="minify-assets">
 		<echo msg="Minifying assets" />
-		<exec dir="${dir}" command="bundle exec rake build:all" checkreturn="true" />
+		<exec command="npm run build" checkreturn="true" />
 	</target>
-	-->
 
 	<!-- Recreate the necessary folders -->
 	<target name="prepare-structure" depends="clean">
@@ -140,8 +143,7 @@
 			checkreturn="true"
 			outputProperty='package-version' />
 
-		<!-- Build and ninify assets -->
-		<!--
+		<!-- Build and minify assets -->
 		<if>
 			<equals arg1="${env}" arg2="production" />
 			<then>
@@ -150,7 +152,6 @@
 				</phingcall>
 			</then>
 		</if>
-		-->
 
 		<phingcall target="wrap-package">
 			<property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}_${package-version}" />
