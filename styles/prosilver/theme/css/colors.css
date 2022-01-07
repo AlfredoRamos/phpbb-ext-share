@@ -1,9 +1,6 @@
 .share-link > .share-icon {
-	color: #fff;
-}
-
-.share-link > .share-icon {
 	background-color: #105289;
+	color: #fff;
 }
 
 .share-link-whatsapp > .share-icon,

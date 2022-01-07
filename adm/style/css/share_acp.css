@@ -30,8 +30,8 @@
 
 .share-preview .share-list {
 	text-align: left;
-	user-select: none;
 	margin-top: 0;
+	user-select: none;
 }
 
 .share-preview .share-item {
