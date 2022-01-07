@@ -228,7 +228,7 @@ class acp
 			$this->template->assign_block_vars('SHARE_SOCIAL_NETWORKS_SORTED', [
 				'KEY' => $value,
 				'ICON' => trim($allowed[$value]['icon']),
-				'LANG' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $value))),
+				'NAME' => sprintf('SHARE_%s', strtoupper(str_replace('-', '_', $value))),
 				'ENABLED' => in_array($value, $enabled, true)
 			]);
 		}
