@@ -37,5 +37,10 @@
 			"filename": "share.json",
 			"ssl": true
 		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
 	}
 }
