@@ -8,39 +8,39 @@
 
 .share-link-whatsapp > .share-icon,
 .share-link-whatsapp-web > .share-icon {
-	background-color: #25D366;
+	background-color: #25d366;
 }
 
 .share-link-telegram > .share-icon {
-	background-color: #2CA5E0;
+	background-color: #2ca5e0;
 }
 
 .share-link-facebook > .share-icon {
-	background-color: #1877F2;
+	background-color: #1877f2;
 }
 
 .share-link-twitter > .share-icon {
-	background-color: #1DA1F2;
+	background-color: #1da1f2;
 }
 
 .share-link-reddit > .share-icon {
-	background-color: #FF4500;
+	background-color: #ff4500;
 }
 
 .share-link-vk > .share-icon {
-	background-color: #4680C2;
+	background-color: #4680c2;
 }
 
 .share-link-tumblr > .share-icon {
-	background-color: #36465D;
+	background-color: #36465d;
 }
 
 .share-link-evernote > .share-icon {
-	background-color: #00A82D;
+	background-color: #00a82d;
 }
 
 .share-link-pocket > .share-icon {
-	background-color: #EF3F56;
+	background-color: #ef3f56;
 }
 
 .share-link-digg > .share-icon {
@@ -56,5 +56,9 @@
 }
 
 .share-link-skype > .share-icon {
-	background-color: #00AFF0;
+	background-color: #00aff0;
+}
+
+.share-link-pinterest > .share-icon {
+	background-color: #bd081c;
 }

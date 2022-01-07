@@ -233,6 +233,7 @@ class helper
 	{
 		// %1$s => URL
 		// %2$s => Text
+		// %3$s => Space (optional)
 		$social_networks = [
 			'whatsapp'		=> [
 				'url'	=> 'https://wa.me/?text=%2$s%3$s%1$s',
@@ -289,6 +290,10 @@ class helper
 			'skype'			=> [
 				'url'	=> 'https://web.skype.com/share?text=%2$s&url=%1$s',
 				'icon'	=> 'cib:skype'
+			],
+			'pinterest'		=> [
+				'url'	=> 'https://pinterest.com/pin/create/button/?url=%1$s&description=%2$s',
+				'icon'	=> 'cib:pinterest'
 			],
 			'email'			=> [
 				'url'	=> 'mailto:?subject=%2$s&body=%1$s',
