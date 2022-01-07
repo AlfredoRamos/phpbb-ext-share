@@ -38,6 +38,7 @@ $lang = array_merge($lang, [
 	'SHARE_DIIGO' => 'Diigo',
 	'SHARE_LINKEDIN' => 'LinedIn',
 	'SHARE_SKYPE' => 'Skype',
+	'SHARE_PINTEREST' => 'Pinterest',
 	'SHARE_EMAIL' => 'Email',
 	'SHARE_SMS' => 'SMS'
 ]);

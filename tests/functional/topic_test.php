@@ -32,7 +32,7 @@ class topic_test extends \phpbb_functional_test_case
 		$this->assertSame(1, $list->count());
 
 		$networks = $list->filter('.share-item');
-		$this->assertSame(16, $networks->count());
+		$this->assertSame(17, $networks->count());
 
 		foreach ($networks as $network)
 		{

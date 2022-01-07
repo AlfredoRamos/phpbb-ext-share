@@ -42,7 +42,7 @@ class acp_test extends \phpbb_functional_test_case
 		$this->assertSame(1, $table->count());
 
 		$networks = $table->filter('.share-item');
-		$this->assertSame(16, $networks->count());
+		$this->assertSame(17, $networks->count());
 
 		$preview = $crawler->filter('.share-preview');
 		$this->assertSame(1, $preview->count());
@@ -51,7 +51,7 @@ class acp_test extends \phpbb_functional_test_case
 		$this->assertSame(1, $list->count());
 
 		$networks = $list->filter('.share-item');
-		$this->assertSame(16, $networks->count());
+		$this->assertSame(17, $networks->count());
 
 		foreach ($networks as $network)
 		{
