@@ -42,7 +42,7 @@ class helper
 
 		$type = $this->config['share_type'];
 
-		if (empty($type))
+		if (isset($post_row['S_SHARE_LINKS']) || empty($type))
 		{
 			return $post_row;
 		}
@@ -71,6 +71,13 @@ class helper
 	public function assign_post_template_vars(int $post_id = 0, string $post_subject = '', bool $first_post = false, int $topic_id = 0)
 	{
 		if (empty($post_id) || empty($post_subject))
+		{
+			return;
+		}
+
+		$block_var = $this->template->retrieve_block_vars('postrow.share_social_networks', []);
+
+		if (!empty($block_var))
 		{
 			return;
 		}

@@ -3,12 +3,12 @@
 {%- endif -%}
 {% if postrow.share_social_networks|length > 0 %}
 {% apply spaceless %}
-<section class="share-list">
+<div class="share-list">
 	{% for social_network in postrow.share_social_networks %}
 	<a class="share-item share-link share-link-{{ social_network.key|striptags|escape}}" href="{% if postrow.U_SHARE_POST %}{{ postrow.U_SHARE_POST }}{% else %}{{ social_network.url }}{% endif %}" rel="external nofollow noreferrer noopener" title="{{ lang(social_network.name)|striptags|escape }}">
 		{{ share.social_icon(social_network.icon) }}
 	</a>
 	{% endfor %}
-</section>
+</div>
 {% endapply %}
 {% endif %}
