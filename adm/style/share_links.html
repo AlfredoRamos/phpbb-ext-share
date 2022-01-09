@@ -5,7 +5,7 @@
 {% apply spaceless %}
 <section class="share-list">
 	{% for SOCIAL_NETWORK in SHARE_SOCIAL_NETWORKS_SORTED %}
-	<span data-network="{{ SOCIAL_NETWORK.KEY|striptags|escape}}" class="share-item share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape}}{% if not SOCIAL_NETWORK.ENABLED %} share-item-disabled{% endif %}" title="{{ lang(SOCIAL_NETWORK.NAME)|striptags|escape }}">
+	<span data-network="{{ SOCIAL_NETWORK.KEY|striptags|escape('html_attr') }}" class="share-item share-link share-link-{{ SOCIAL_NETWORK.KEY|striptags|escape('html_attr') }}{% if not SOCIAL_NETWORK.ENABLED %} share-item-disabled{% endif %}" title="{{ lang(SOCIAL_NETWORK.NAME)|striptags|escape('html_attr') }}">
 		{{ share.social_icon(SOCIAL_NETWORK.ICON) }}
 	</span>
 	{% endfor %}

@@ -50,12 +50,12 @@
 				{% for NETWORK in SOCIAL_NETWORK %}
 				{% if NETWORK %}
 				<td>
-					<label for="share-link-{{ NETWORK.KEY|striptags|escape}}" class="share-item">
-						<input type="checkbox" name="share_social_networks[]" id="share-link-{{ NETWORK.KEY|striptags|escape}}" value="{{ NETWORK.KEY|striptags|escape}}"{% if NETWORK.ENABLED %} checked="checked"{% endif %}>
-						<span class="share-link share-link-{{ NETWORK.KEY|striptags|escape}}" title="{{ lang(NETWORK.NAME)|striptags|escape }}">
+					<label for="share-link-{{ NETWORK.KEY|striptags|escape('html_attr') }}" class="share-item">
+						<input type="checkbox" name="share_social_networks[]" id="share-link-{{ NETWORK.KEY|striptags|escape('html_attr') }}" value="{{ NETWORK.KEY|striptags|escape('html_attr') }}"{% if NETWORK.ENABLED %} checked="checked"{% endif %}>
+						<span class="share-link share-link-{{ NETWORK.KEY|striptags|escape('html_attr') }}" title="{{ lang(NETWORK.NAME)|striptags|escape('html_attr') }}">
 							{{ share.social_icon(NETWORK.ICON) }}
 						</span>
-						<span class="share-link-title">{{ lang(NETWORK.NAME)|striptags|escape }}</span>
+						<span class="share-link-title">{{ lang(NETWORK.NAME)|striptags|escape('html_attr') }}</span>
 					</label>
 				</td>
 				{% endif %}
@@ -75,7 +75,7 @@
 	<fieldset class="share-preview">
 		<legend>{{ lang('PREVIEW') }}</legend>
 		{% include '@alfredoramos_share/share_links.html' ignore missing %}
-		<input type="hidden" name="share_social_networks_order" value="{{ SHARE_SOCIAL_NETWORKS_SORTED|filter(NETWORK => NETWORK.ENABLED)|map(NETWORK => NETWORK.KEY)|join(',')|striptags|escape }}">
+		<input type="hidden" name="share_social_networks_order" value="{{ SHARE_SOCIAL_NETWORKS_SORTED|filter(NETWORK => NETWORK.ENABLED)|map(NETWORK => NETWORK.KEY)|join(',')|striptags|escape('html_attr') }}">
 	</fieldset>
 	{% endif %}
 

@@ -5,7 +5,7 @@
 {% apply spaceless %}
 <div class="share-list">
 	{% for social_network in postrow.share_social_networks %}
-	<a class="share-item share-link share-link-{{ social_network.key|striptags|escape}}" href="{% if postrow.U_SHARE_POST %}{{ postrow.U_SHARE_POST }}{% else %}{{ social_network.url }}{% endif %}" rel="external nofollow noreferrer noopener" title="{{ lang(social_network.name)|striptags|escape }}">
+	<a class="share-item share-link share-link-{{ social_network.key|striptags|escape('html_attr') }}" href="{% if postrow.U_SHARE_POST %}{{ postrow.U_SHARE_POST }}{% else %}{{ social_network.url }}{% endif %}" rel="external nofollow noreferrer noopener" title="{{ lang(social_network.name)|striptags|escape('html_attr') }}">
 		{{ share.social_icon(social_network.icon) }}
 	</a>
 	{% endfor %}
