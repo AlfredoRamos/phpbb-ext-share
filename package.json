@@ -26,7 +26,6 @@
 		"glob": "^7.2.0",
 		"postcss": "^8.4.4",
 		"postcss-cli": "^9.1.0",
-		"sass": "^1.44.0",
 		"stylelint": "^14.1.0",
 		"stylelint-order": "^5.0.0",
 		"uglify-js": "^3.14.5"
