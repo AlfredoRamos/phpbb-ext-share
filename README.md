@@ -5,6 +5,7 @@ Share Links extension for phpBB.
 [![Build Status](https://img.shields.io/github/workflow/status/AlfredoRamos/phpbb-ext-share/CI?style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-share/actions)
 [![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-share.svg?label=stable&style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-share/releases)
 [![Code Quality](https://img.shields.io/codacy/grade/b7f39e63a66f4d9cb47f3fa5600a12cd.svg?style=flat-square)](https://app.codacy.com/gh/AlfredoRamos/phpbb-ext-share/dashboard)
+[![Translation Progress](https://badges.crowdin.net/phpbb-ext-share/localized.svg)](https://crowdin.com/project/phpbb-ext-share)
 [![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-share.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-share/master/license.txt)
 
 Adds social share links after a post, either only on topics or on all of them, to share them to social networks.
@@ -33,6 +34,7 @@ Currently supported social networks: WhatsApp, Telegram, Facebook, Twitter, Redd
 
 - [**Download page**](https://github.com/AlfredoRamos/phpbb-ext-share/releases)
 - [GitHub issues](https://github.com/AlfredoRamos/phpbb-ext-share/issues)
+- [Crowdin translations](https://crowdin.com/project/phpbb-ext-share)
 
 ### Donate
 
@@ -54,7 +56,7 @@ If you like or found my work useful and want to show some appreciation, you can 
 
 - Go to `Administration Control Panel` > `Extensions` > `Share Links` > `Settings`
 - Choose the `Type` to show share links only on topics (first post of topic) or on all posts
-- Choose the `Social Networks` you want to show or hide.
+- Choose the `Social Networks` you want to show or hide
 - In the `Preview` section, drag and drop the icons to change the order of the links
 - Click on `Submit` to save the configuration changes
 
