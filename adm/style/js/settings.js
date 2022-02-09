@@ -62,7 +62,7 @@
 	};
 
 	// Sort handler
-	const sortable = new Sortable.create(container, {
+	const sortable = new window.Sortable.create(container, {
 		handle: '.share-item',
 		animation: 150,
 		ghostClass: 'share-item-ghost',

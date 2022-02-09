@@ -3,4 +3,4 @@ module.exports = {
 		require('cssnano'),
 		require('autoprefixer')
 	]
-}
+};
