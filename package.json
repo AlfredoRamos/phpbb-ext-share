@@ -23,7 +23,7 @@
 	"devDependencies": {
 		"autoprefixer": "^10.4.0",
 		"cssnano": "^5.0.12",
-		"glob": "^7.2.0",
+		"glob": "^8.0.3",
 		"postcss": "^8.4.4",
 		"postcss-cli": "^9.1.0",
 		"stylelint": "^14.1.0",
