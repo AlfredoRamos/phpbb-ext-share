@@ -6,7 +6,7 @@ Share Links extension for phpBB.
 [![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-share.svg?label=stable&style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-share/releases)
 [![Code Quality](https://img.shields.io/codacy/grade/b7f39e63a66f4d9cb47f3fa5600a12cd.svg?style=flat-square)](https://app.codacy.com/gh/AlfredoRamos/phpbb-ext-share/dashboard)
 [![Translation Progress](https://badges.crowdin.net/phpbb-ext-share/localized.svg)](https://crowdin.com/project/phpbb-ext-share)
-[![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-share.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-share/master/license.txt)
+[![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-share.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-share/main/license.txt)
 
 Adds social share links after a post, either only on topics or on all of them, to share them to social networks.
 
@@ -40,9 +40,9 @@ Currently supported social networks: WhatsApp, Telegram, Facebook, Twitter, Redd
 
 If you like or found my work useful and want to show some appreciation, you can consider supporting its development by giving a donation.
 
-[![Donate with PayPal](https://alfredoramos.mx/images/paypal.svg)](https://alfredoramos.mx/donate/) | [![Donate with Stripe](https://alfredoramos.mx/images/stripe.svg)](https://alfredoramos.mx/donate/)
-:-:|:-:
-[![Donate with PayPal](https://alfredoramos.mx/images/donate_paypal.svg)](https://alfredoramos.mx/donate/) | [![Donate with Stripe](https://alfredoramos.mx/images/donate_stripe.svg)](https://alfredoramos.mx/donate/)
+|    [![Donate with PayPal](https://alfredoramos.mx/images/paypal.svg)](https://alfredoramos.mx/donate/)     |    [![Donate with Stripe](https://alfredoramos.mx/images/stripe.svg)](https://alfredoramos.mx/donate/)     |
+| :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
+| [![Donate with PayPal](https://alfredoramos.mx/images/donate_paypal.svg)](https://alfredoramos.mx/donate/) | [![Donate with Stripe](https://alfredoramos.mx/images/donate_stripe.svg)](https://alfredoramos.mx/donate/) |
 
 ### Installation
 
